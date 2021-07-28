@@ -38,9 +38,9 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////
 // test route from server to React app
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from Server!" });
-});
+// app.get("/api", (req, res) => {
+//   res.json({ message: "Hello from Server!" });
+// });
 // stroage path for uploaded photos
 const storage = multer.memoryStorage()
 const  filename = (req, file, cb) => {
