@@ -57,18 +57,32 @@ const upload = multer({
         },
         filename : filename
       })
-      
+
+/// gets all coffees
+app.get('/api/index',(req, res) =>{
+      Coffee.find({})
+      .then((coffees =>
+        res.json(coffees)))
+})  
+// router.get('/tickets/',(req, res) => {
+//         Tickets.find({})
+//         .populate('owner')
+//         .then((tickets) =>{
+//             res.render('index', {tickets : tickets})
+//         })
+//         .catch(console.error);
+//     });  
 // adding new coffee to db
 app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
   let newCoffee = {
       name: req.body.name,
       desc: req.body.desc,
       price: req.body.price,
-      weight: req.body.weight,
-      img: {
-          data: req.file.buffer,
-          contentType: req.file.mimetype
-      }
+      weight: req.body.weight
+      // img: {
+      //     data: req.file.buffer,
+      //     contentType: req.file.mimetype
+      // }
   }
   Coffee.create(newCoffee)
   .then(coffee => {
