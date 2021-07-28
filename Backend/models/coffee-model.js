@@ -5,7 +5,7 @@ const CoffeeSchema = new Schema({
 
     name: {
         type: String,
-        required : true
+        // required : true
         
     },
     desc : {

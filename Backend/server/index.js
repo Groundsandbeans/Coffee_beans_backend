@@ -39,7 +39,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////
 // test route from server to React app
 app.get("/api", (req, res) => {
-  res.json({ message: "Hello from MongoDB server!" });
+  res.json({ message: "Hello from Server!" });
 });
 // stroage path for uploaded photos
 const storage = multer.memoryStorage()
@@ -61,7 +61,7 @@ const upload = multer({
 // adding new coffee to db
 app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
   let newCoffee = {
-      name: req.body.title,
+      name: req.body.name,
       desc: req.body.desc,
       price: req.body.price,
       weight: req.body.weight,
@@ -72,7 +72,7 @@ app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
   }
   Coffee.create(newCoffee)
   .then(coffee => {
-      // console.log(coffee)
+      console.log(coffee)
       // res.redirect('/route for coffee landing page')
   })
   .catch(console.error);
