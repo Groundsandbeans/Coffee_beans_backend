@@ -77,6 +77,8 @@ app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
   })
   .catch(console.error);
 });
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////
     // const session = await stripe.checkout.sessions.create({
     //   payment_method_types: ['card'],
