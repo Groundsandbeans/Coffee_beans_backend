@@ -17,7 +17,6 @@
   "devDependencies": {},
   "scripts": {
     "start": "node ../Backend/server/index.js"
-
   },
   "author": "",
   "license": "ISC"
