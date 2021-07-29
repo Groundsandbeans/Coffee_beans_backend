@@ -5,19 +5,30 @@ const CoffeeSchema = new Schema({
 
     name: {
         type: String,
-        // required : true
+        required : true
         
     },
-    desc : {
-        flavor : [{ type: String}, {required : true}],
-        roast : [{ type: String}, {required : true}],
-        region : [{ type: String}, {required : true}],
+    
+    flavor: {
+         type: String,
+         required : true
     },
-    price : {
-        prices : [{ type: String}, {required : true}],
+    roast:{
+         type: String,
+        required : true
     },
-    weight : {
-        sizeOptions : [{ type: String}, {required : true}],
+    region: { 
+        type: String, 
+        required : true
+    },
+    price: {
+        type: [String], 
+        required : true
+    },
+    weight: {
+         type: [String], 
+         required : true
+        
     },
     img : { 
         data: Buffer, 
