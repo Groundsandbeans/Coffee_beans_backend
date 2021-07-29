@@ -9,7 +9,7 @@ const multer = require('multer');
 const path = require('path');
 const Coffee = require('../models/coffee-model');
 //Frontend URL for Stripe redirects
-const YOUR_DOMAIN = 'http://localhost:3000'
+// const YOUR_DOMAIN = 'http://localhost:3000'
 
 app.use(methodOverride('_method'))
 app.use(express.json())
@@ -39,7 +39,7 @@ app.post('/api/create-checkout-session', async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////
 // test route from server to React app
 app.get("/api", (req, res) => {
-  res.json({ message: "Hello from Deshawn and the may the Server be with you!" });
+  res.json({ "message": "Hello from Deshawn and the may the Server be with you!" });
 });
 // stroage path for uploaded photos
 const storage = multer.memoryStorage()
