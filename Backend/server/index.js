@@ -9,14 +9,14 @@ const multer = require('multer');
 const path = require('path');
 const Coffee = require('../models/coffee-model');
 //Frontend URL for Stripe redirects
-const YOUR_DOMAIN = 'http://localhost:3001'
+const YOUR_DOMAIN = 'http://localhost:3000'
 
 app.use(methodOverride('_method'))
 app.use(express.json())
 
 app.use(
   cors({
-    origin: 'http://localhost:3001',
+    origin: 'http://localhost:3000',
     credentials: true,
   })
 );
@@ -38,9 +38,9 @@ app.post('/api/create-checkout-session', async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////
 // test route from server to React app
-// app.get("/api", (req, res) => {
-//   res.json({ message: "Hello from Server!" });
-// });
+app.get("/api", (req, res) => {
+  res.json({ message: "Hello from Deshawn and the may the Server be with you!" });
+});
 // stroage path for uploaded photos
 const storage = multer.memoryStorage()
 const  filename = (req, file, cb) => {
@@ -64,25 +64,17 @@ app.get('/api/index',(req, res) =>{
       .then((coffees =>
         res.json(coffees)))
 })  
-// router.get('/tickets/',(req, res) => {
-//         Tickets.find({})
-//         .populate('owner')
-//         .then((tickets) =>{
-//             res.render('index', {tickets : tickets})
-//         })
-//         .catch(console.error);
-//     });  
 // adding new coffee to db
 app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
   let newCoffee = {
       name: req.body.name,
       desc: req.body.desc,
       price: req.body.price,
-      weight: req.body.weight
-      // img: {
-      //     data: req.file.buffer,
-      //     contentType: req.file.mimetype
-      // }
+      weight: req.body.weight,
+      img: {
+          data: req.file.buffer,
+          contentType: req.file.mimetype
+      }
   }
   Coffee.create(newCoffee)
   .then(coffee => {
@@ -109,7 +101,7 @@ app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
     // });
     // res.redirect(303, session.url)
 
-app.set('port', process.env.PORT || 3001)
+app.set('port', process.env.PORT || 3000)
 
 app.listen(app.get('port'), () => {
     console.log(`✅ PORT: ${app.get('port')} 🌟`)
