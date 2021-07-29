@@ -84,6 +84,12 @@ app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
   .catch(console.error);
 });
 
+app.get('/api/:id', (req, res, next) => {
+  const id = req.params.id
+  Coffee.findById(id)
+  .then(coffee => res.json(coffee))
+})
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////
     // const session = await stripe.checkout.sessions.create({
