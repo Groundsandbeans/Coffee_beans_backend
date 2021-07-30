@@ -1,39 +1,60 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const stripe = require('stripe')(process.env.API_KEY);
+const stripe = require('stripe')('sk_test_egiiH17xRt4QTerkgBqpwoqm');
+const { v4: uuidv4 } = require('uuid')
 const cors = require('cors')
 const methodOverride = require('method-override');
 const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 const Coffee = require('../models/coffee-model');
-//Frontend URL for Stripe redirects
-// const YOUR_DOMAIN = 'http://localhost:3000'
-
+const util = require('util')
 app.use(methodOverride('_method'))
 app.use(express.json())
 
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
+app.use(cors())
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000',
+//     credentials: true,
+//   })
+// );
+
+///////////////////////////////////////////////////////////////////////////////
+//Stripe payment route
+app.post('/api/payment', (req, res) => {
+  const {cart, token} = req.body
+  console.log(`RESPONSE ${util.inspect(req.body, false, null)}`)
+  console.log(`Product ${util.inspect(cart, false, null)}`)
+  console.log(`TOKEN ${util.inspect(token, false, null)}`)
+  // console.log(`PRICE ${cart.price}`)
+  const price = cart.reduce((a, b) => {
+    return a + b.price}, 0)
+  console.log(`FINAL PRICE ${price}`)
+  const idempotencyKey = uuidv4()
+
+  return stripe.customers.create({
+    email: token.email,
+    source: token.id
   })
-);
-
-app.post('/api/create-checkout-session', async (req, res) => {
-  try {
-    console.log(req.body)
-    const { amount } = req.body
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: "usd"
-    })
-
-    res.status(200).send(paymentIntent.client_secret)
-  } catch (err) {
-    res.status(500).json({ statusCode: 500, message: err.message })
-    }
+  .then(customer => {
+    stripe.charges.create({
+      amount: price * 100,
+      currency: 'usd',
+      customer: customer.id,
+      receipt_email: token.email,
+      // description: `purchased: ${product.name}`,
+      shipping: {
+        name: token.card.name,
+        address: {
+          country: token.card.address_country
+        }
+      }
+    }, {idempotencyKey})
+  })
+  .then(result => res.status(200).json(result))
+  .catch(err => console.log(err))
 })
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -89,23 +110,6 @@ app.get('/api/:id', (req, res, next) => {
   Coffee.findById(id)
   .then(coffee => res.json(coffee))
 })
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-    // const session = await stripe.checkout.sessions.create({
-    //   payment_method_types: ['card'],
-    //   line_items: [
-    //     {
-    //       // TODO: replace this with the `price` of the product you want to sell
-    //       price: '{{PRICE_ID}}',
-    //       quantity: 1,
-    //     },
-    //   ],
-    //   mode: 'payment',
-    //   success_url: `${YOUR_DOMAIN}/success.html`,
-    //   cancel_url: `${YOUR_DOMAIN}/cancel.html`,
-    // });
-    // res.redirect(303, session.url)
 
 app.set('port', process.env.PORT || 3000)
 
