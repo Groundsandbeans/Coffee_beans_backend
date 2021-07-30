@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bytes": "^3.1.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -14,7 +15,6 @@
     "stripe": "^8.165.0",
     "twilio": "^3.66.0"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node ../Backend/server/index.js"
   },

@@ -4,7 +4,7 @@
         "flavor" :  "vanilla",
         "roast" : "dark",
         "region" : "napal", 
-        "prices" : 
+        "price" : 
             ["10.00", "15.00", "20.00"]
         ,
         "weight" : 
@@ -16,7 +16,7 @@
         "flavor" :  "Choclate",
         "roast" : "dark",
         "region" : "Atlanta", 
-        "prices" : 
+        "price" : 
             ["10.00", "15.00", "20.00"]
         ,
         "weight" : 
@@ -29,7 +29,7 @@
         "flavor" :  "Starwberry",
         "roast" : "lite",
         "region" : "houston", 
-        "prices" : 
+        "price" : 
             ["10.00", "15.00", "20.00"]
         ,
         "weight" : 
