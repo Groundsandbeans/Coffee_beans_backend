@@ -6,10 +6,8 @@ const { v4: uuidv4 } = require('uuid')
 const cors = require('cors')
 const methodOverride = require('method-override');
 const fs = require('fs');
-const multer = require('multer');
 const path = require('path');
 const Coffee = require('../models/coffee-model');
-const util = require('util')
 app.use(methodOverride('_method'))
 app.use(express.json())
 
@@ -24,19 +22,10 @@ app.use(cors())
 // Have Node serve the files for our built Coffee-app
 app.use(express.static(path.resolve(__dirname, '../server/build')));
 
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../server/build', 'index.html'));
-});
-
 ///////////////////////////////////////////////////////////////////////////////
 //Stripe payment route
 app.post('/api/payment', (req, res) => {
   const {cart, token} = req.body
-  console.log(`RESPONSE ${util.inspect(req.body, false, null)}`)
-  console.log(`Product ${util.inspect(cart, false, null)}`)
-  console.log(`TOKEN ${util.inspect(token, false, null)}`)
-  // console.log(`PRICE ${cart.price}`)
   const price = cart.reduce((a, b) => {
     return a + b.price}, 0)
   console.log(`FINAL PRICE ${price}`)
@@ -52,7 +41,6 @@ app.post('/api/payment', (req, res) => {
       currency: 'usd',
       customer: customer.id,
       receipt_email: token.email,
-      // description: `purchased: ${product.name}`,
       shipping: {
         name: token.card.name,
         address: {
@@ -70,22 +58,6 @@ app.post('/api/payment', (req, res) => {
 app.get("/api", (req, res) => {
   res.json({ "message": "Hello from Deshawn and the may the Server be with you!" });
 });
-// stroage path for uploaded photos
-const storage = multer.memoryStorage()
-const  filename = (req, file, cb) => {
-        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-            cb(null, true)
-        } else {
-            cb(null, false)
-        }
-      };
-const upload = multer({
-        storage: storage,
-        limits: {
-            fileSize: 1024 * 1024 * 5
-        },
-        filename : filename
-      })
 
 /// gets all coffees
 app.get('/api/index',(req, res) =>{
@@ -94,7 +66,7 @@ app.get('/api/index',(req, res) =>{
         res.json(coffees)))
 })  
 // adding new coffee to db
-app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
+app.post('/api/create-new-coffee', (req, res, next) => {
   //Turns prices and weights into array and removes commas and whitespace
   let prices = req.body.price.replace(/,/g,"")
   let priceArr = prices.split(' ')
