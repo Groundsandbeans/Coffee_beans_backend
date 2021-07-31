@@ -1,60 +1,40 @@
 [
     {
         "name": "Deshawn Favorite",
-        "desc" : 
-           { "flavor" : 
-            ["vanilla"],
-            "roast" : 
-            ["dark"],
-            "region" : 
-            ["napal"]
-        },  
+        "flavor" :  "vanilla",
+        "roast" : "dark",
+        "region" : "napal", 
         "price" : 
-           { "prices" : 
             ["10.00", "15.00", "20.00"]
-        },
+        ,
         "weight" : 
-           {"sizeOptions" : 
-            [".8oz", "12oz", "24oz"]
-        }
+            [".8oz", "12oz", "24oz"],
+        "img": "https://images.unsplash.com/photo-1562051036-e0eea191d42f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
     },
     {
         "name": "Salah's Favorite",
-        "desc" : 
-           { "flavor" : 
-            ["vanilla"],
-            "roast" : 
-            ["dark"],
-            "region" : 
-            ["napal"]
-        },  
+        "flavor" :  "Choclate",
+        "roast" : "dark",
+        "region" : "Atlanta", 
         "price" : 
-           { "prices" : 
             ["10.00", "15.00", "20.00"]
-        },
+        ,
         "weight" : 
-           {"sizeOptions" : 
-            [".8oz", "12oz", "24oz"]
-        }
+            [".8oz", "12oz", "24oz"],
+        "img": "https://images.unsplash.com/photo-1562051036-e0eea191d42f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
     },
-       {
-        "name": "Steven's Favorite",
-        "desc" : 
-           { "flavor" : 
-            ["vanilla"],
-            "roast" : 
-            ["dark"],
-            "region" : 
-            ["napal"]
-        },  
+
+    {
+        "name": "Steven Favorite",
+        "flavor" :  "Starwberry",
+        "roast" : "lite",
+        "region" : "houston", 
         "price" : 
-           { "prices" : 
             ["10.00", "15.00", "20.00"]
-        },
+        ,
         "weight" : 
-           {"sizeOptions" : 
-            [".8oz", "12oz", "24oz"]
-        }
+            [".8oz", "12oz", "24oz"],
+        "img": "https://images.unsplash.com/photo-1562051036-e0eea191d42f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
     }
 ]
 
