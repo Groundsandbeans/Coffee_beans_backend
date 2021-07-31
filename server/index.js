@@ -87,24 +87,29 @@ app.get('/api/index',(req, res) =>{
 })  
 // adding new coffee to db
 app.post('/api/create-new-coffee', upload.single('image'), (req, res, next) => {
+  //Turns prices and weights into array and removes commas and whitespace
+  let prices = req.body.price.replace(/,/g,"")
+  let priceArr = prices.split(' ')
+  let weights = req.body.weight.replace(/,/g,"")
+  let weightArr = weights.split(' ')
+
+  // New Coffee object
   let newCoffee = {
       name: req.body.name,
-      desc: req.body.desc,
-      price: req.body.price,
-      weight: req.body.weight,
-      img: {
-          data: req.file.buffer,
-          contentType: req.file.mimetype
-      }
+      flavor: req.body.flavor,
+      roast: req.body.roast,
+      region: req.body.region,
+      price: priceArr,
+      weight: weightArr,
+      img: req.body.img
   }
+  console.log(newCoffee)
   Coffee.create(newCoffee)
-  .then(coffee => {
-      console.log(coffee)
-      // res.redirect('/route for coffee landing page')
-  })
+  .then(coffee => res.send(`${coffee} added`))
   .catch(console.error);
 });
 
+//Show individual coffee
 app.get('/api/:id', (req, res, next) => {
   const id = req.params.id
   Coffee.findById(id)
