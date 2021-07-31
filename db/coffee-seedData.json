@@ -1,0 +1,60 @@
+[
+    {
+        "name": "Deshawn Favorite",
+        "desc" : 
+           { "flavor" : 
+            ["vanilla"],
+            "roast" : 
+            ["dark"],
+            "region" : 
+            ["napal"]
+        },  
+        "price" : 
+           { "prices" : 
+            ["10.00", "15.00", "20.00"]
+        },
+        "weight" : 
+           {"sizeOptions" : 
+            [".8oz", "12oz", "24oz"]
+        }
+    },
+    {
+        "name": "Salah's Favorite",
+        "desc" : 
+           { "flavor" : 
+            ["vanilla"],
+            "roast" : 
+            ["dark"],
+            "region" : 
+            ["napal"]
+        },  
+        "price" : 
+           { "prices" : 
+            ["10.00", "15.00", "20.00"]
+        },
+        "weight" : 
+           {"sizeOptions" : 
+            [".8oz", "12oz", "24oz"]
+        }
+    },
+       {
+        "name": "Steven's Favorite",
+        "desc" : 
+           { "flavor" : 
+            ["vanilla"],
+            "roast" : 
+            ["dark"],
+            "region" : 
+            ["napal"]
+        },  
+        "price" : 
+           { "prices" : 
+            ["10.00", "15.00", "20.00"]
+        },
+        "weight" : 
+           {"sizeOptions" : 
+            [".8oz", "12oz", "24oz"]
+        }
+    }
+]
+
