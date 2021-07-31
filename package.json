@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.13.3",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.12",
+    "stripe": "^8.165.0",
+    "twilio": "^3.66.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ../Backend/server/index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
