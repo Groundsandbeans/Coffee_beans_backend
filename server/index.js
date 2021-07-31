@@ -21,6 +21,14 @@ app.use(cors())
 //   })
 // );
 
+// Have Node serve the files for our built Coffee-app
+app.use(express.static(path.resolve(__dirname, '../server/build')));
+
+// All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../server/build', 'index.html'));
+});
+
 ///////////////////////////////////////////////////////////////////////////////
 //Stripe payment route
 app.post('/api/payment', (req, res) => {
