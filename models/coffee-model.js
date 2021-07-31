@@ -5,13 +5,11 @@ const CoffeeSchema = new Schema({
 
     name: {
         type: String,
-        // required : true
-        
+        required : true
     },
-    desc : {
-        flavor : [{ type: String}, {required : true}],
-        roast : [{ type: String}, {required : true}],
-        region : [{ type: String}, {required : true}],
+    flavor: {
+         type: String,
+         required : true
     },
     price : {
         prices : [{ type: String}, {required : true}],
@@ -20,13 +18,9 @@ const CoffeeSchema = new Schema({
         sizeOptions : [{ type: String}, {required : true}],
     },
     img : { 
-        data: Buffer, 
-        contentType: String, 
-     },
-    _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
+        type: String,
+        required: true
+     }
 },
 {timestamps : true}
 )
