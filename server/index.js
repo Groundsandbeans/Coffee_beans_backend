@@ -10,7 +10,7 @@ const path = require('path');
 const Coffee = require('../models/coffee-model');
 app.use(methodOverride('_method'))
 app.use(express.json())
-
+const util = require('util')
 app.use(cors())
 // app.use(
 //   cors({
@@ -25,7 +25,9 @@ app.use(express.static(path.resolve(__dirname, '../server/build')));
 ///////////////////////////////////////////////////////////////////////////////
 //Stripe payment route
 app.post('/api/payment', (req, res) => {
-  const {cart, token} = req.body
+
+  const {cart, token, order} = req.body
+  console.log(`ORDER ${order}`)
   const price = cart.reduce((a, b) => {
     return a + b.price}, 0)
   console.log(`FINAL PRICE ${price}`)
