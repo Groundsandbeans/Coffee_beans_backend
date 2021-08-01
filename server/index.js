@@ -98,6 +98,13 @@ app.get('/api/:id', (req, res, next) => {
   .then(coffee => res.json(coffee))
 })
 
+//Delete individual coffee
+app.delete('/api/delete/:id', (req, res, next) => {
+  const id = req.params.id
+  Coffee.findOneAndDelete({_id: id})
+  .then(coffee => res.json(coffee))
+})
+
 app.set('port', process.env.PORT || 3000)
 
 app.listen(app.get('port'), () => {
