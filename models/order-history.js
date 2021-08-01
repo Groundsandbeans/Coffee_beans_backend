@@ -4,11 +4,21 @@ const mongoose = require('../db/connections')
 
 const OrdersSchema = new Schema({
 
-    orderHistory : [{type : String}],
-    _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users' 
-    }
+    orderHistory : 
+
+        [{type : String}],
+
+    name : 
+
+        [{type : String}],
+    email : 
+
+        [{type: String}]
+    ,
+    totalPrice : 
+
+        [{type : String}]
+
 },
     {timestamps : true}
 )
