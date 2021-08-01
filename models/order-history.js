@@ -3,21 +3,16 @@ const mongoose = require('../db/connections')
 
 
 const OrdersSchema = new Schema({
-
-    orderHistory : 
-
-        [{type : String}],
-
     name : 
 
         [{type : String}],
     email : 
 
-        [{type: String}]
+        {type: String}
     ,
     totalPrice : 
 
-        [{type : String}]
+        {type : String}
 
 },
     {timestamps : true}
