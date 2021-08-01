@@ -105,6 +105,31 @@ app.delete('/api/delete/:id', (req, res, next) => {
   .then(coffee => res.json(coffee))
 })
 
+//Edit individual coffee
+app.put('/api/edit/:id', (req, res, next) => {
+  const id = req.params.id
+
+  let prices = req.body.price.replace(/,/g," ")
+  let priceArr = prices.split(' ')
+  let weights = req.body.weight.replace(/,/g," ")
+  let weightArr = weights.split(' ')
+
+  Coffee.findByIdAndUpdate(id, {
+    name: req.body.name,
+    flavor: req.body.flavor,
+    roast: req.body.roast,
+    region: req.body.region,
+    price: priceArr,
+    weight: weightArr,
+    img: req.body.img
+  },
+  { new: true }
+  )
+  .then(coffee => res.json(coffee))
+  
+
+})
+
 app.set('port', process.env.PORT || 3000)
 
 app.listen(app.get('port'), () => {
