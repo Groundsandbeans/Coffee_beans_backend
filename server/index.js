@@ -31,6 +31,7 @@ app.post('/api/payment', (req, res) => {
 
   const {cart, token, order} = req.body
   console.log(`ORDER ${order}`)
+  console.log(util.inspect(order, false, null));
   const price = cart.reduce((a, b) => {
     return a + b.price}, 0)
   console.log(`FINAL PRICE ${price}`)
@@ -59,13 +60,30 @@ app.post('/api/payment', (req, res) => {
 })
 
 ///////////////////////////////////////////////////////////////////////////////
-// test route from server to React app
+//Get shoppingCart items
+app.get('/api/cart/:id', (req, res) => {
+  ShoppingCart.find({email: req.params.id})
+  .then(coffees => res.json(coffees))
+})
+
+
+// Add coffee to ShoppingCart
 app.post("/api/cart/:id", (req, res) => {
   // find email for current shopping cart user // push the coffee id to that users shoping cart
   ShoppingCart.findOneAndUpdate({email: req.body.email}, { $push : {coffee_id: req.body.coffee}}, {new: true,
     upsert: true})
   .then((user  => console.log(user)))
 });
+
+// Remove coffee from ShoppingCart
+app.delete('/api/cart/:id', (req, res) => {
+  console.log(req.body.email)
+  console.log(req.body.arr)
+  ShoppingCart.findOneAndUpdate({email: req.body.email}, {coffee_id: req.body.arr})
+  // .then(ShoppingCart.find({email: req.body.email})
+  .then(coffee => res.json(coffee))
+  // )
+})
 
 /// gets all coffees
 app.get('/api/index',(req, res) =>{
