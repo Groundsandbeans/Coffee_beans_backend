@@ -4,11 +4,9 @@ const mongoose = require('../db/connections')
 const ShoppingCartSchema = new Schema({
     
        
-    email: {type: String}
-    ,
+    email: {type: String},
     coffee_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'Coffee'}]
 },
-
 {timestamps : true}
 )
 

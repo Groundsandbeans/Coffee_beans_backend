@@ -19,7 +19,6 @@
   "scripts": {
     "start": "node ./server/index.js",
     "build": "cd ./Coffee_bean && npm install && npm run build"
-
   },
   "engines": {
     "node": "14.16.0"

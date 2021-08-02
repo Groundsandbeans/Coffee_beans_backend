@@ -8,6 +8,9 @@ const methodOverride = require('method-override');
 const fs = require('fs');
 const path = require('path');
 const Coffee = require('../models/coffee-model');
+const Users = require('../models/users-model')
+const Orders = require('../models/order-history')
+const ShoppingCart = require('../models/shopping-cart')
 app.use(methodOverride('_method'))
 app.use(express.json())
 const util = require('util');
@@ -58,8 +61,11 @@ app.post('/api/payment', (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////
 // test route from server to React app
-app.get("/api", (req, res) => {
-  res.json({ "message": "Hello from Deshawn and the may the Server be with you!" });
+app.post("/api/cart/:id", (req, res) => {
+  // find email for current shopping cart user // push the coffee id to that users shoping cart
+  ShoppingCart.findOneAndUpdate({email: req.body.email}, { $push : {coffee_id: req.body.coffee}}, {new: true,
+    upsert: true})
+  // .then((user  => console.log(user)))
 });
 
 /// gets all coffees
@@ -91,6 +97,7 @@ app.post('/api/create-new-coffee', (req, res, next) => {
   .then(coffee => res.send(`${coffee} added`))
   .catch(console.error);
 });
+
 
 //Show individual coffee
 app.get('/api/:id', (req, res, next) => {
