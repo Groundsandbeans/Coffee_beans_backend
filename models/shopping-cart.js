@@ -4,16 +4,13 @@ const mongoose = require('../db/connections')
 const ShoppingCartSchema = new Schema({
     
        
-    email: {type: String, required : true }
+    email: {type: String}
     ,
-    _id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Coffee'
-    }
+    coffee_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'Coffee'}]
 },
 
 {timestamps : true}
 )
 
-const Users = mongoose.model('ShoppingCart', ShoppingCartSchema)
+const ShoppingCart = mongoose.model('ShoppingCart', ShoppingCartSchema)
 module.exports = ShoppingCart;

@@ -10,7 +10,8 @@ const path = require('path');
 const Coffee = require('../models/coffee-model');
 app.use(methodOverride('_method'))
 app.use(express.json())
-const util = require('util')
+const util = require('util');
+const ShoppingCart = require('../models/shopping-cart');
 app.use(cors())
 // app.use(
 //   cors({
@@ -128,6 +129,19 @@ app.put('/api/edit/:id', (req, res, next) => {
   .then(coffee => res.json(coffee))
   
 
+})
+
+app.post('/api/cart/:id', (req, res) => {
+  
+  ShoppingCart.findOneAndUpdate({email: req.body.email}, {
+    new: true,
+    upsert: true
+  }, { $push: {coffee_id: req.body.coffee} })
+  .then(coffee => console.log(coffee))
+
+
+  console.log(req.body.coffee)
+  console.log(req.body.email)
 })
 
 app.set('port', process.env.PORT || 3000)
