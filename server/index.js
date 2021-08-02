@@ -14,7 +14,6 @@ const ShoppingCart = require('../models/shopping-cart')
 app.use(methodOverride('_method'))
 app.use(express.json())
 const util = require('util');
-const ShoppingCart = require('../models/shopping-cart');
 app.use(cors())
 // app.use(
 //   cors({
@@ -65,7 +64,7 @@ app.post("/api/cart/:id", (req, res) => {
   // find email for current shopping cart user // push the coffee id to that users shoping cart
   ShoppingCart.findOneAndUpdate({email: req.body.email}, { $push : {coffee_id: req.body.coffee}}, {new: true,
     upsert: true})
-  // .then((user  => console.log(user)))
+  .then((user  => console.log(user)))
 });
 
 /// gets all coffees
@@ -136,19 +135,6 @@ app.put('/api/edit/:id', (req, res, next) => {
   .then(coffee => res.json(coffee))
   
 
-})
-
-app.post('/api/cart/:id', (req, res) => {
-  
-  ShoppingCart.findOneAndUpdate({email: req.body.email}, {
-    new: true,
-    upsert: true
-  }, { $push: {coffee_id: req.body.coffee} })
-  .then(coffee => console.log(coffee))
-
-
-  console.log(req.body.coffee)
-  console.log(req.body.email)
 })
 
 app.set('port', process.env.PORT || 3000)
