@@ -2,14 +2,15 @@ const { Schema } = require("mongoose");
 const mongoose = require('../db/connections')
 
 const CoffeeSchema = new Schema({
+    _id: Schema.Types.ObjectId,
 
     name: {
         type: String,
         required : true
     },
     flavor: {
-         type: String,
-         required : true
+        type : { type: String, required : true},
+         
     },
     roast:{
          type: String,
@@ -30,7 +31,8 @@ const CoffeeSchema = new Schema({
     img : {
         type: String, 
         required : true
-   }
+   },
+   shoppingCart: [{ type: Schema.Types.ObjectId, ref: 'ShoppingCart' }]
 },
 {timestamps : true}
 )

@@ -9,6 +9,7 @@ const ShoppingCartSchema = new Schema({
     coffee_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'Coffee'}]
 },
 
+
 {timestamps : true}
 )
 
