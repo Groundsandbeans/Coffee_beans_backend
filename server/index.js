@@ -11,6 +11,11 @@ const Coffee = require('../models/coffee-model');
 const Users = require('../models/users-model')
 const Orders = require('../models/order-history')
 const ShoppingCart = require('../models/shopping-cart')
+// Twilio Account SID and Auth Token 
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
+require('dotenv').config()
 app.use(methodOverride('_method'))
 app.use(express.json())
 const util = require('util');
@@ -169,11 +174,16 @@ app.put('/api/edit/:id', (req, res, next) => {
 
 //Receipt Route
 app.post('/thanks', (req, res) => {
-  //Total price of order
-  console.log(req.body.totalPrice)
-  //Phone number of customer
-  console.log(req.body.phoneNumber)
+  // sends automated receipt to client 
+  client.messages
+  .create({
+     body: `Thank you for your purchase at CoffeeBean of $${req.body.totalPrice}, your Coffee is beening shipped espresso!` ,
+     from: '+18727136450',
+     to: `+1${req.body.phoneNumber}`
+   })
 })
+
+
 
 app.set('port', process.env.PORT || 3000)
 
