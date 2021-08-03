@@ -87,11 +87,10 @@ app.post("/api/cart/:id", (req, res) => {
 // Remove coffee from ShoppingCart
 app.delete('/api/cart/:id', (req, res) => {
   console.log(req.body.email)
-  console.log(req.body.arr)
-  ShoppingCart.findOneAndUpdate({email: req.body.email}, {coffee_id: req.body.arr})
-  // .then(ShoppingCart.find({email: req.body.email})
+  console.log(req.body.remove)
+  ShoppingCart.findOneAndUpdate({email: req.body.email}, 
+    {$pull: {coffee: {coffee_id: req.body.remove}}})
   .then(coffee => res.json(coffee))
-  // )
 })
 
 // Remove users shoppingCart
