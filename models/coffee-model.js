@@ -2,14 +2,14 @@ const { Schema } = require("mongoose");
 const mongoose = require('../db/connections')
 
 const CoffeeSchema = new Schema({
-
     name: {
         type: String,
         required : true
     },
     flavor: {
-         type: String,
-         required : true
+     type: String, 
+     required : true
+         
     },
     roast:{
          type: String,

@@ -1,19 +1,13 @@
-const coffeeData = require('./coffee-seedData.json')
-const Coffee = require('../models/coffee-model')
+const shoppingCartData = require('./shopping-cartSeedData.json')
 const ShoppingCart = require('../models/shopping-cart')
 
 // Remove any preexisting data
-Coffee.deleteMany({})
-  .then(() => ShoppingCart.deleteMany({}))
+ShoppingCart.deleteMany({})
   .then(() => {
-    return ShoppingCart.create({email: 'steveplayshorn@gmail.com'})
-    .then(() => {
-      // Insert the dummy data and return it
-      // so we can log it in the next .then
-      return Coffee.insertMany(coffeeData);
-    })
+    // Insert the dummy data and return it
+    // so we can log it in the next .then
+    return ShoppingCart.insertMany(shoppingCartData);
   })
-  
   // If the insert was successful, we'll see the
   // results in the terminal
   .then(console.log)
