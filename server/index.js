@@ -157,8 +157,14 @@ app.put('/api/edit/:id', (req, res, next) => {
   { new: true }
   )
   .then(coffee => res.json(coffee))
-  
+})
 
+//Receipt Route
+app.post('/thanks', (req, res) => {
+  //Total price of order
+  console.log(req.body.totalPrice)
+  //Phone number of customer
+  console.log(req.body.phoneNumber)
 })
 
 app.set('port', process.env.PORT || 3000)
