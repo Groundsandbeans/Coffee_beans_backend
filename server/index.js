@@ -69,8 +69,17 @@ app.get('/api/cart/:id', (req, res) => {
 
 // Add coffee to ShoppingCart
 app.post("/api/cart/:id", (req, res) => {
+  console.log(req.body)
+  console.log(req.body.price)
+  console.log(req.body.weight)
   // find email for current shopping cart user // push the coffee id to that users shoping cart
-  ShoppingCart.findOneAndUpdate({email: req.body.email}, { $push : {coffee_id: req.body.coffee}}, {new: true,
+  ShoppingCart.findOneAndUpdate({email: req.body.email}, 
+    { $push : 
+      {coffee: 
+        {coffee_id: req.body.coffee, 
+        price: req.body.price, 
+        weight: req.body.weight}} }, 
+      {new: true,
     upsert: true})
   .then((user  => console.log(user)))
 });
