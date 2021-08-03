@@ -1,18 +1,3 @@
 [
-    
-    { "email" : "email@me.com",
-     "coffee" : ["610804a47a7970460a0ee0c7"]
-
-},
-
-{ "email" : "email@me.com",
-    "coffee" : ["610804a47a7970460a0ee0c7"]
-
-},
-
-{ "email" : "email@me.com",
-    "coffee" : ["610804a47a7970460a0ee0c7"]
-
-}
-
+    { "email" : "email@me.com"}
 ]

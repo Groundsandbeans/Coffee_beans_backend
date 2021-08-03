@@ -5,7 +5,11 @@ const ShoppingCartSchema = new Schema({
     
        
     email: {type: String},
-    coffee_id: [{type: mongoose.Schema.Types.ObjectId, ref: 'Coffee'}]
+    coffee: [{
+        coffee_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Coffee'},
+        price: String,
+        weight: String
+    }]
 },
 {timestamps : true}
 )
