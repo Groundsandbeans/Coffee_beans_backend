@@ -61,11 +61,6 @@ app.post('/api/payment', (req, res) => {
 })
 
 ///////////////////////////////////////////////////////////////////////////////
-// test route from server to React app
-app.get("/api", (req, res) => {
-  res.json({ "message": "Hello from Deshawn and the may the Server be with you!" });
-});
-
 /// gets all coffees
 app.get('/api/index',(req, res) =>{
       Coffee.find({})
