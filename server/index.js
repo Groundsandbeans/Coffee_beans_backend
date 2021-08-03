@@ -85,6 +85,12 @@ app.delete('/api/cart/:id', (req, res) => {
   // )
 })
 
+// Remove users shoppingCart
+app.delete('/api/cartDelete/:email', (req, res) => {
+  ShoppingCart.findOneAndDelete({email: req.params.email})
+  .then(coffee => res.json(coffee))
+})
+
 /// gets all coffees
 app.get('/api/index',(req, res) =>{
       Coffee.find({})
