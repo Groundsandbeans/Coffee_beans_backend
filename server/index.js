@@ -130,6 +130,31 @@ app.put('/api/edit/:id', (req, res, next) => {
 
 })
 
+///////////////////////////////////////////////////////////////////////////////
+//Get shoppingCart items
+app.get('/api/cart/:id', (req, res) => {
+  ShoppingCart.find({email: req.params.id})
+  .then(coffees => res.json(coffees))
+})
+
+
+// Add coffee to ShoppingCart
+app.post("/api/cart/:id", (req, res) => {
+  console.log(req.body)
+  console.log(req.body.price)
+  console.log(req.body.weight)
+  // find email for current shopping cart user // push the coffee id to that users shoping cart
+  ShoppingCart.findOneAndUpdate({email: req.body.email}, 
+    { $push : 
+      {coffee: 
+        {coffee_id: req.body.coffee, 
+        price: req.body.price, 
+        weight: req.body.weight}} }, 
+      {new: true,
+    upsert: true})
+  .then((user  => console.log(user)))
+});
+
 app.post('/api/cart/:id', (req, res) => {
   
   ShoppingCart.findOneAndUpdate({email: req.body.email}, {
@@ -141,6 +166,21 @@ app.post('/api/cart/:id', (req, res) => {
 
   console.log(req.body.coffee)
   console.log(req.body.email)
+})
+
+// Remove coffee from ShoppingCart
+app.delete('/api/cart/:id', (req, res) => {
+  console.log(req.body.email)
+  console.log(req.body.remove)
+  ShoppingCart.findOneAndUpdate({email: req.body.email}, 
+    {$pull: {coffee: {coffee_id: req.body.remove}}})
+  .then(coffee => res.json(coffee))
+})
+
+// Remove users shoppingCart
+app.delete('/api/cartDelete/:email', (req, res) => {
+  ShoppingCart.findOneAndDelete({email: req.params.email})
+  .then(coffee => res.json(coffee))
 })
 
 
