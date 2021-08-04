@@ -2,7 +2,7 @@
 
 ![Coffee Bean](https://i.imgur.com/LGQnpGP.jpg)
 
-## [Check it the app!](https://coffeebean3.herokuapp.com/)
+## [Check out the app!](https://coffeebean3.herokuapp.com/)
 
 ## [Frontend Code](https://github.com/Groundsandbeans/Coffee_bean)
 
